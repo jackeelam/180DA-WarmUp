@@ -194,6 +194,8 @@ if(IMU.BerryIMUversion == 99):
 IMU.initIMU()       #Initialise the accelerometer, gyroscope and compass
 
 
+counter = 1
+threshold = 10
 while True:
 
     #Read the accelerometer,gyroscope and magnetometer values
@@ -316,7 +318,6 @@ while True:
     AccXangle =  (math.atan2(ACCy,ACCz)*RAD_TO_DEG)
     AccYangle =  (math.atan2(ACCz,ACCx)+M_PI)*RAD_TO_DEG
 
-
     #Change the rotation value of the accelerometer to -/+ 180 and
     #move the Y axis '0' point to up.  This makes it easier to read.
     if AccYangle > 90:
@@ -383,10 +384,22 @@ while True:
 
     ##################### END Tilt Compensation ########################
 
+    currAccXangle = AccXangle
+    currAccYangle = AccYangle
 
+    if counter > 1:
+        if prevAccXangle < threshold and currAccXangle >= threshold:
+            print("forward punch!")
+        if prevAccYangle < threshold and currAccYangle >= threshold:
+            print("upward punch!")
+
+    prevAccXangle = currAccXangle
+    prevAccYangle = currAccYangle
+
+    counter+=1
     if 1:                       #Change to '0' to stop showing the angles from the accelerometer
         outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (AccXangle, AccYangle)
-
+        if AccXangle > 10
     if 1:                       #Change to '0' to stop  showing the angles from the gyro
         outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (gyroXangle,gyroYangle,gyroZangle)
 
