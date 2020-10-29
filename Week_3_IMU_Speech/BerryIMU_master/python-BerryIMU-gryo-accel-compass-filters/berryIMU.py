@@ -399,7 +399,7 @@ while True:
     counter+=1
     if 1:                       #Change to '0' to stop showing the angles from the accelerometer
         outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (AccXangle, AccYangle)
-        if AccXangle > 10
+
     if 1:                       #Change to '0' to stop  showing the angles from the gyro
         outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (gyroXangle,gyroYangle,gyroZangle)
 
